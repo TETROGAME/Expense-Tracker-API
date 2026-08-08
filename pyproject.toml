@@ -1,0 +1,23 @@
+[project]
+name = "expense-tracker-api"
+version = "0.1.0"
+description = "Simple expense tracker API with JWT authorization"
+authors = [
+    {name = "Nikita Timoshenko",email = "nikita.timoshenko.dev@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi (>=0.141.1,<0.142.0)",
+    "sqlalchemy (>=2.0.51,<3.0.0)"
+]
+
+[dependency-groups]
+dev = [
+    "pytest (>=9.1.1,<10.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
