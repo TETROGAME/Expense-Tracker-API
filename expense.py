@@ -16,7 +16,8 @@ class ExpenseCategory(Enum):
 @dataclass
 class Expense:
     """Class that stores information about singular expense"""
-    amount: float
+    amount: float = 0.00
+    description: str = "Placeholder task description"
     category: ExpenseCategory = ExpenseCategory.Others
     date: datetime = datetime.now()
 
@@ -33,18 +34,18 @@ class ExpenseManager:
             self.expenses[next_id] = expense
     
    
-    def _validate_expense(self, expense: Expense):
+    def _validate_expense(self, expense: Expense) -> bool:
         conditions = [
                 expense.amount >= 0
                 ]
         return all(conditions)
 
-    def _print_expenses(self):
+    def _print_expenses(self) -> None:
         for id, expense in self.expenses.items():
             print(f"Id: {id}, Expense:{expense}")
 
 
-    def add(self, expense: Expense):
+    def add(self, expense: Expense) -> None:
         if self._validate_expense(expense):
             next_id = next(self._id_iter)
             self.expenses[next_id] = expense
