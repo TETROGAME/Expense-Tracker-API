@@ -12,6 +12,9 @@ dependencies = [
     "sqlalchemy (>=2.0.51,<3.0.0)"
 ]
 
+[tool.poetry.scripts]
+expense_tracker_api = "expense_tracker_api.__main__:main"
+
 [dependency-groups]
 dev = [
     "pytest (>=9.1.1,<10.0.0)"
