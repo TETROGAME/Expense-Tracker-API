@@ -1,6 +1,4 @@
-from datetime import datetime
-
-from expense import Expense, ExpenseCategory, ExpenseManager
+from expense_tracker_api.expense import Expense, ExpenseManager
 
 
 def main():
