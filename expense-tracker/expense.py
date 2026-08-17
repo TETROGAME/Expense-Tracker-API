@@ -1,0 +1,67 @@
+import itertools
+from dataclasses import dataclass
+from datetime import datetime
+from enum import Enum, auto
+
+
+class ExpenseCategory(Enum):
+    Groceries = auto()
+    Leisure = auto()
+    Electronics = auto()
+    Utilities = auto()
+    Clothing = auto()
+    Health = auto()
+    Others = auto()
+
+
+@dataclass
+class Expense:
+    """Class that stores information about singular expense"""
+
+    amount: float = 0.00
+    description: str = "Placeholder task description"
+    category: ExpenseCategory = ExpenseCategory.Others
+    date: datetime = datetime.now()
+
+
+class ExpenseManager:
+
+    expenses: dict[int, Expense]
+
+    _id_iter = itertools.count()
+
+    def __init__(self, expenses: list[Expense] | None = None):
+        if expenses is None:
+            expenses = []
+        self.expenses = {}
+        for expense in expenses:
+            next_id = next(self._id_iter)
+            self.expenses[next_id] = expense
+
+    def _validate_expense(self, expense: Expense) -> bool:
+        conditions = [expense.amount >= 0]
+        return all(conditions)
+
+    def _print_expenses(self) -> None:
+        for id, expense in self.expenses.items():
+            print(f"Id: {id}, Expense:{expense}")
+
+    def add(self, expense: Expense) -> None:
+        if self._validate_expense(expense):
+            next_id = next(self._id_iter)
+            self.expenses[next_id] = expense
+        else:
+            print("Error! Invalid expense")
+
+    def find_by_id(self, target_id: int) -> Expense | None:
+        target_expense = self.expenses.get(target_id)
+        if target_expense is None:
+            print("Expense with such id is nowhere to be found")
+            return None
+        return target_expense
+
+    def delete(self, target_id: int) -> bool:
+        if self.expenses.get(target_id) is None:
+            return False
+        self.expenses.pop(target_id)
+        return True
