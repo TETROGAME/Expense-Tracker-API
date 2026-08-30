@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta, timezone
 from enum import Enum, auto
 
 from sqlalchemy import String
@@ -25,3 +26,6 @@ class ExpenseORM(Base):
     amount: Mapped[float]
     category: Mapped[ExpenseCategory]
     description: Mapped[str] = mapped_column(String(256))
+    created_at: Mapped[datetime] = mapped_column(
+        default=datetime.now(tz=timezone(timedelta(hours=3)))
+    )
