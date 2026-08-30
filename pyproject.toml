@@ -9,11 +9,12 @@ readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
     "fastapi (>=0.141.1,<0.142.0)",
-    "sqlalchemy (>=2.0.51,<3.0.0)"
+    "sqlalchemy (>=2.0.51,<3.0.0)",
+    "uvicorn (>=0.52.4,<0.53.0)"
 ]
 
 [tool.poetry.scripts]
-expense_tracker_api = "expense_tracker_api.__main__:main"
+start = "expense_tracker_api.__main__:main"
 
 [dependency-groups]
 dev = [
